@@ -1,19 +1,54 @@
 <?xml version="1.0" encoding="utf-8"?>
-<android.support.constraint.ConstraintLayout
+<RelativeLayout
         xmlns:android="http://schemas.android.com/apk/res/android"
         xmlns:tools="http://schemas.android.com/tools"
         xmlns:app="http://schemas.android.com/apk/res-auto"
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
+        android:layout_width="match_parent" android:layout_height="match_parent"
         tools:context=".MainActivity">
 
     <TextView
+            android:id="@+id/textview_sound_recorder_heading"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Hello World!"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintLeft_toLeftOf="parent"
-            app:layout_constraintRight_toRightOf="parent"
-            app:layout_constraintTop_toTopOf="parent"/>
+            android:text="Sound Recorder"
+            android:layout_centerHorizontal="true"
+            android:textSize="24dp"
+            android:textColor="@color/primary_text_color"
+            android:layout_marginTop="@dimen/big_margin"
+    />
 
-</android.support.constraint.ConstraintLayout>
+    <TextView
+            android:id="@+id/textview_recording_time"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerHorizontal="true"
+            android:layout_centerVertical="true"
+            android:text="00:00:00"
+            android:textSize="48dp"/>
+
+    <android.support.design.widget.FloatingActionButton
+            android:id="@+id/fab_start_recording"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            app:fabSize="normal"
+            android:layout_alignParentBottom="true"
+            android:layout_marginLeft="@dimen/big_margin"
+            app:backgroundTint="@color/fab_background"
+            android:src="@drawable/ic_record"
+            android:layout_marginBottom="@dimen/big_margin"
+    />
+
+    <android.support.design.widget.FloatingActionButton
+            android:id="@+id/fab_recordings"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            app:fabSize="normal"
+            android:layout_alignParentBottom="true"
+            android:layout_marginLeft="@dimen/big_margin"
+            app:backgroundTint="@color/fab_background"
+            android:src="@drawable/ic_list"
+            android:layout_marginBottom="@dimen/big_margin"
+            android:layout_toRightOf="@id/fab_start_recording"
+    />
+
+</RelativeLayout>

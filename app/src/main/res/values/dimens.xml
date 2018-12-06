@@ -2,4 +2,5 @@
 <resources>
     <dimen name="medium_margin">16dp</dimen>
     <dimen name="big_margin">32dp</dimen>
+    <dimen name="giant_margin">64dp</dimen>
 </resources>

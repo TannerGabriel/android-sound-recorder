@@ -3,6 +3,7 @@ package com.example.gabriel.soundrecorder
 import android.Manifest
 import android.annotation.SuppressLint
 import android.annotation.TargetApi
+import android.arch.lifecycle.Observer
 import android.arch.lifecycle.ViewModelProvider
 import android.arch.lifecycle.ViewModelProviders
 import android.content.pm.PackageManager
@@ -63,6 +64,14 @@ class MainActivity : AppCompatActivity() {
 
         //Getting the viewmodel
         viewModel = ViewModelProviders.of(this, factory).get(RecorderViewModel::class.java)
+
+        addObserver()
+    }
+
+    private fun addObserver() {
+        viewModel?.getRecordingTime()?.observe(this, Observer {
+            textview_recording_time.text = it
+        })
     }
 
 

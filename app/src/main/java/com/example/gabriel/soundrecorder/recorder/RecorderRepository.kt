@@ -36,9 +36,9 @@ class RecorderRepository(){
     }
 
 
-
     private var output: String? = null
     private var mediaRecorder: MediaRecorder? = null
+    private val dir: File = File(Environment.getExternalStorageDirectory().absolutePath + "/soundrecorder/")
 
     init {
         try{
@@ -50,8 +50,15 @@ class RecorderRepository(){
             e.printStackTrace()
         }
 
+
+
+        if(dir.exists()){
+            val count = dir.listFiles().size
+            output = Environment.getExternalStorageDirectory().absolutePath + "/soundrecorder/recording"+count+".mp3"
+        }
+
         mediaRecorder = MediaRecorder()
-        output = Environment.getExternalStorageDirectory().absolutePath + "/soundrecorder/recording.mp3"
+
 
         mediaRecorder?.setAudioSource(MediaRecorder.AudioSource.MIC)
         mediaRecorder?.setOutputFormat(MediaRecorder.OutputFormat.MPEG_4)
@@ -95,6 +102,11 @@ class RecorderRepository(){
 
     private fun initRecorder() {
         mediaRecorder = MediaRecorder()
+
+        if(dir.exists()){
+            val count = dir.listFiles().size
+            output = Environment.getExternalStorageDirectory().absolutePath + "/soundrecorder/recording"+count+".mp3"
+        }
 
         mediaRecorder?.setAudioSource(MediaRecorder.AudioSource.MIC)
         mediaRecorder?.setOutputFormat(MediaRecorder.OutputFormat.MPEG_4)

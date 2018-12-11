@@ -4,28 +4,25 @@ import android.Manifest
 import android.annotation.SuppressLint
 import android.annotation.TargetApi
 import android.arch.lifecycle.Observer
-import android.arch.lifecycle.ViewModelProvider
 import android.arch.lifecycle.ViewModelProviders
+import android.content.Intent
 import android.content.pm.PackageManager
-import android.media.MediaRecorder
 import android.os.Build
 import android.support.v7.app.AppCompatActivity
 import android.os.Bundle
-import android.os.Environment
-import android.support.design.widget.FloatingActionButton
 import android.support.v4.app.ActivityCompat
 import android.support.v4.content.ContextCompat
 import android.view.View
-import android.widget.Toast
-import com.example.gabriel.soundrecorder.R.id.*
+import com.example.gabriel.soundrecorder.player.RecordingsActivity
 import com.example.gabriel.soundrecorder.recorder.RecorderViewModel
 import com.example.gabriel.soundrecorder.util.InjectorUtils
+import com.example.gabriel.soundrecorder.util.RecorderState
 import kotlinx.android.synthetic.main.activity_main.*
-import java.io.IOException
 
 class MainActivity : AppCompatActivity() {
 
     private var viewModel: RecorderViewModel? = null
+
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -56,6 +53,15 @@ class MainActivity : AppCompatActivity() {
         fab_resume_recording.setOnClickListener {
             resumeRecording()
         }
+
+        fab_recordings.setOnClickListener {
+            val intent = Intent(this, RecordingsActivity::class.java)
+            startActivity(intent)
+        }
+
+        if(viewModel?.recorderState == RecorderState.Stopped){
+            fab_stop_recording.isEnabled = false
+        }
     }
 
     private fun initUI() {
@@ -78,20 +84,20 @@ class MainActivity : AppCompatActivity() {
     @SuppressLint("RestrictedApi")
     private fun startRecording() {
         viewModel?.startRecording()
+
+        fab_stop_recording.isEnabled = true
         fab_start_recording.visibility = View.INVISIBLE
-        fab_stop_recording.visibility = View.VISIBLE
         fab_pause_recording.visibility = View.VISIBLE
-        fab_recordings.visibility = View.INVISIBLE
         fab_resume_recording.visibility = View.INVISIBLE
     }
 
     @SuppressLint("RestrictedApi")
     private fun stopRecording(){
         viewModel?.stopRecording()
+
+        fab_stop_recording.isEnabled = false
         fab_start_recording.visibility = View.VISIBLE
-        fab_stop_recording.visibility = View.INVISIBLE
         fab_pause_recording.visibility = View.INVISIBLE
-        fab_recordings.visibility = View.VISIBLE
         fab_resume_recording.visibility = View.INVISIBLE
     }
 
@@ -100,10 +106,9 @@ class MainActivity : AppCompatActivity() {
     private fun pauseRecording(){
         viewModel?.pauseRecording()
 
+        fab_stop_recording.isEnabled = true
         fab_start_recording.visibility = View.INVISIBLE
-        fab_stop_recording.visibility = View.VISIBLE
         fab_pause_recording.visibility = View.INVISIBLE
-        fab_recordings.visibility = View.INVISIBLE
         fab_resume_recording.visibility = View.VISIBLE
     }
 
@@ -111,11 +116,9 @@ class MainActivity : AppCompatActivity() {
     @SuppressLint("RestrictedApi")
     private fun resumeRecording(){
         viewModel?.resumeRecording()
-
+        fab_stop_recording.isEnabled = true
         fab_start_recording.visibility = View.INVISIBLE
-        fab_stop_recording.visibility = View.VISIBLE
         fab_pause_recording.visibility = View.VISIBLE
-        fab_recordings.visibility = View.INVISIBLE
         fab_resume_recording.visibility = View.INVISIBLE
     }
 

@@ -66,7 +66,6 @@
     />
 
 
-
     <android.support.design.widget.FloatingActionButton
             android:id="@+id/fab_stop_recording"
             android:layout_width="wrap_content"
@@ -74,11 +73,11 @@
             app:fabSize="normal"
             android:layout_alignParentBottom="true"
             android:layout_marginLeft="@dimen/giant_margin"
-            android:layout_centerHorizontal="true"
             app:backgroundTint="@color/fab_background"
             android:src="@drawable/ic_stop"
             android:layout_marginBottom="@dimen/big_margin"
-            android:visibility="invisible"
+            android:visibility="visible"
+            android:layout_centerHorizontal="true"
     />
 
     <android.support.design.widget.FloatingActionButton
@@ -89,21 +88,12 @@
             android:layout_alignParentBottom="true"
             app:backgroundTint="@color/fab_background"
             android:src="@drawable/ic_list"
+            android:layout_marginRight="@dimen/giant_margin"
             android:layout_marginBottom="@dimen/big_margin"
+            android:layout_alignParentRight="true"
             android:layout_centerHorizontal="true"
     />
 
-    <android.support.design.widget.FloatingActionButton
-            android:id="@+id/fab_tag"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            app:fabSize="normal"
-            android:layout_alignParentBottom="true"
-            android:layout_marginRight="@dimen/giant_margin"
-            app:backgroundTint="@color/fab_background"
-            android:src="@drawable/ic_bookmark"
-            android:layout_marginBottom="@dimen/big_margin"
-            android:layout_alignParentRight="true"
-    />
+
 
 </RelativeLayout>

@@ -28,6 +28,7 @@ class MainActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
 
+        checkNeededPermissions()
         initUI()
 
         fab_start_recording.setOnClickListener {
@@ -61,6 +62,18 @@ class MainActivity : AppCompatActivity() {
 
         if(viewModel?.recorderState == RecorderState.Stopped){
             fab_stop_recording.isEnabled = false
+        }
+    }
+
+    private fun checkNeededPermissions() {
+        println("Requesting permission")
+        if (ContextCompat.checkSelfPermission(this, Manifest.permission.READ_EXTERNAL_STORAGE)
+            != PackageManager.PERMISSION_GRANTED || ContextCompat.checkSelfPermission(this, Manifest.permission.WRITE_EXTERNAL_STORAGE)
+            != PackageManager.PERMISSION_GRANTED || ContextCompat.checkSelfPermission(this, Manifest.permission.RECORD_AUDIO)
+            != PackageManager.PERMISSION_GRANTED) {
+            println("Requesting permission")
+            ActivityCompat.requestPermissions(this,
+                arrayOf(Manifest.permission.READ_EXTERNAL_STORAGE, Manifest.permission.WRITE_EXTERNAL_STORAGE, Manifest.permission.RECORD_AUDIO), 0)
         }
     }
 
